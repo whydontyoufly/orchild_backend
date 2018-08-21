@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orchid.mapper.UserInfoMapper">
+    <sql id="allField">
+      id,user_name,account_name,password,telephone,email,qq,dept_id,user_position,
+        staff_no,remark,status,create_user,create_time,pwd_status,data_area_code,fail_count,last_time
+    </sql>
+    <resultMap id="DetailMap" type="com.orchid.entity.UserInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="account_name" jdbcType="VARCHAR" property="accountName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+        <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="user_position" jdbcType="VARCHAR" property="userPosition"/>
+        <result column="staff_no" jdbcType="VARCHAR" property="staffNo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="pwd_status" jdbcType="SMALLINT" property="pwdStatus"/>
+        <result column="data_area_code" jdbcType="VARCHAR" property="dataAreaCode"/>
+        <result column="fail_count" jdbcType="INTEGER" property="failCount"/>
+        <result column="last_time" jdbcType="TIMESTAMP" property="lastTime"/>
+    </resultMap>
+
+    <select id="selectByAccount" parameterType="String" resultMap="DetailMap">
+        SELECT 
+        <include refid="allField"/>
+         FROM u_user_info
+        WHERE account_name=#{VALUE}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.orchid.dto.UserDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO u_user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+              id,
+            </if>
+            <if test="userName!=null">
+              user_name,
+            </if>
+            <if test="accountName != null">
+                account_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="telephone != null">
+                telephone,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="userPosition != null">
+                user_position,
+            </if>
+            <if test="staffNo != null">
+                staff_no,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="pwdStatus != null">
+                pwd_status,
+            </if>
+            <if test="dataAreaCode != null and dataAreaCode != ''">
+                data_area_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null">
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="deptId != null">
+                #{deptId,jdbcType=BIGINT},
+            </if>
+            <if test="userPosition != null">
+                #{userPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="staffNo != null">
+                #{staffNo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pwdStatus != null">
+                #{pwdStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="dataAreaCode != null and dataAreaCode != ''">
+                #{dataAreaCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
